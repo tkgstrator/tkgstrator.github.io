@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap");
+
+.coop-join {
+    margin-top: 20px;
+    color: #ddd;
+    font-size: 1.6em;
+    padding: 5px 20px 5px 20px;
+    border: 2px solid #ddd;
+    border-radius: 1.5em;
+    cursor: pointer;
+}
+
+.project-content-overview {
+    font-family: "Noto Sans JP", sans-serif;
+    display: block;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    color: #ddd;
+
+    #overview,
+    #title {
+        font-family: "Noto Sans JP", sans-serif;
+    }
+
+    h1,
+    h2 {
+        padding-top: 20px;
+    }
+
+    h1 {
+        color: #ff7500;
+    }
+
+    h2 {
+        color: #39e464;
+    }
+
+    #overview :not(#title) {
+        font-size: 1.1em;
+        line-height: 1.3em;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    #overview #title {
+        font-size: 1.8em;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        width: 70%;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    #point {
+        font-size: 1.6em;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        padding-bottom: 15px;
+    }
+}

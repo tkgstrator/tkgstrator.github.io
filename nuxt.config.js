@@ -40,7 +40,35 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    '@nuxtjs/firebase',
   ],
+  firebase: {
+    config: {
+      apiKey: "AIzaSyB2YKyLcVd39KzxcIA4eGDo0sK5i4srzT8",
+      authDomain: "salmonrunproject.firebaseapp.com",
+      databaseURL: "https://salmonrunproject.firebaseio.com",
+      projectId: "salmonrunproject",
+      storageBucket: "salmonrunproject.appspot.com",
+      messagingSenderId: "237537081773",
+      appId: "1:237537081773:web:52ea3c9979c49838e54924",
+      measurementId: "G-EBXKSE6T4B"
+    },
+    services: {
+      firestore: true,
+      // messaging: true,
+      auth: true // Just as example. Can be any other service.
+    }
+  },
+  firestore: {
+    memoryOnly: false, // default
+    static: false, // default
+    preload: false, // default
+    chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', // default
+    enablePersistence: true,
+    settings: {
+      // Firestore Settings - currently only works in SPA mode
+    }
+  },
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
@@ -50,5 +78,12 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    extend(config, { isDev, isClient }) {
+      config.module.rules.push({
+        test: /\.md$/,
+        loader: 'raw-loader',
+        exclude: /(node_modules)/,
+      });
+    },
   }
 }
