@@ -61,7 +61,7 @@ export default {
   },
   firestore: {
     memoryOnly: false, // default
-    static: false, // default
+    static: true, // default
     preload: false, // default
     chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', // default
     enablePersistence: true,

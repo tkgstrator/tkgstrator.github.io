@@ -6,12 +6,73 @@
     <div class="page coop-content">
       <div class="coop-content-header">
         <h2><span>Salmon Run</span></h2>
-        <h3><span>iPhone 12 Tournament</span></h3>
-        <span @click="signIn" class="coop-join" v-if="this.loginUser == null"
-          >参加する</span
+        <h3>
+          <span>現在の推定参加者数: {{ random }} 人!!</span>
+        </h3>
+        <span @click="signIn" class="coop-join" v-if="this.loginUser == null">
+          参加する
+        </span>
+        <nuxt-link
+          to="/ranking"
+          class="coop-join"
+          v-if="this.loginUser != null"
         >
+          ランキング確認
+        </nuxt-link>
       </div>
       <div class="coop-content-list-wrapper">
+        <div class="coop-schedule-list">
+          <div class="coop-schedule-list-item">
+            <h5>
+              <time datetime="2020-10-22T08:00:00-04:00">10/23 9:00 p.m.</time>
+              -
+              <time datetime="2020-10-23T20:00:00-04:00">10/24 9:00 a.m.</time>
+            </h5>
+            <div class="coop-schedule-list-item-content">
+              <div class="coop-schedule-list-stage">
+                <img
+                  class="coop-stage-image"
+                  src="https://app.splatoon2.nintendo.net/images/coop_stage/50064ec6e97aac91e70df5fc2cfecf61ad8615fd.png"
+                  alt=""
+                />
+                <p>Ruins of Ark Polaris</p>
+              </div>
+              <div class="coop-schedule-list-weapons">
+                <p>Supplied Weapons</p>
+                <ul>
+                  <li>
+                    <img
+                      class="weapon-image"
+                      src="https://app.splatoon2.nintendo.net/images/weapon/c60760efc43e3a509187a1b714be477f7fb6c514.png"
+                      alt="Splat Dualies"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      class="weapon-image"
+                      src="https://app.splatoon2.nintendo.net/images/weapon/193d0700fdbd08d58c72b7ac0e282984e77a7ffc.png"
+                      alt="Carbon Roller"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      class="weapon-image"
+                      src="https://app.splatoon2.nintendo.net/images/weapon/8f342949acc700b1603425071620dbae8536dbed.png"
+                      alt="H-3 Nozzlenose"
+                    />
+                  </li>
+                  <li>
+                    <img
+                      class="weapon-image"
+                      src="https://app.splatoon2.nintendo.net/images/weapon/6abb5804369429bf96bb32c14d899c4b9da3e431.png"
+                      alt="Goo Tuber"
+                    />
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
         <div id="coop-content-list">
           <div v-html="Overview" class="project-content-overview"></div>
         </div>
@@ -69,7 +130,8 @@ export default {
           power_eggs: 0,
           value: 5,
           nickname: this.loginUser.displayName,
-          uid: this.loginUser.uid
+          uid: this.loginUser.uid,
+          nsaid: ""
         })
       } catch (error) {
         alert(error)
@@ -97,7 +159,8 @@ export default {
   data() {
     return {
       user: [],
-      loginUser: null
+      loginUser: null,
+      random: parseInt(Math.random() * 100)
     }
   }
 }
