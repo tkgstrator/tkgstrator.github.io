@@ -37,11 +37,11 @@
     }
 
     #overview :not(#title) {
-        font-size: 1.1em;
+        font-size: 1.15em;
         line-height: 1.3em;
         margin: 0 auto;
         text-align: center;
-    }
+    }:where
 
     #overview #title {
         font-size: 1.8em;
@@ -66,9 +66,22 @@
     }
 }
 
+#qanda {
+    font-family: "Noto Sans JP", sans-serif !important;
+
+    .question {
+        color: red;
+    }
+
+    .answer {
+        padding-bottom: 1.5em;
+    }
+}
+
 div {
-    font-family: "Splatfont2";
-    display: block;
+    // font-family: "Splatfont2";
+    // display: block;
+
 
     time {
         font-family: "Splatfont2";
@@ -142,6 +155,7 @@ div {
     .coop-schedule-list-weapons li {
         width: 25%;
         max-width: 45px;
+        list-style-type: none;
     }
 
     .coop-schedule-list-weapons img {
@@ -150,7 +164,7 @@ div {
     }
 
     ul {
-        list-style-type: none;
+        // list-style-type: none;
     }
 
     a {

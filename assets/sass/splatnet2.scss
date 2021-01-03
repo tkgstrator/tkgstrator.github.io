@@ -13,9 +13,9 @@ body {
     display: block;
 }
 div {
-    font-family: "Splatfont";
-    display: block;
-    margin: 0 auto;
+    // font-family: "Splatfont";
+    // display: block;
+    // margin: 0 auto;
 
     #app {
         .page {
@@ -68,6 +68,7 @@ div {
                 background-position-y: center;
                 box-sizing: border-box;
                 color: #ff5033;
+                padding-bottom: 20px;
 
                 span {
                     padding-top: 12px;

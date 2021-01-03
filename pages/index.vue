@@ -95,12 +95,13 @@ export default {
     },
   },
   async created() {
+    // this.initialize()
     this.$fireAuth.onAuthStateChanged(async user => {
       await this.readFromFirestore()
       this.loginUser = this.$fireAuth.currentUser
       if (this.loginUser) {
         const result = this.user.filter(user => user.uid == this.loginUser.uid)
-        console.log(result, this.user)
+        console.log(result, this.user, this.loginUser)
         if (result.length == 0) {
           this.createUser()
         }
@@ -122,22 +123,37 @@ export default {
         return
       }
     },
-    async createUser() {
-      const userRef = this.$fireStore.collection("users").doc(this.loginUser.uid)
+    async initialize() {
+      this.presents.forEach(present => {
+      const userRef = this.$fireStore.collection("presents").doc()
       try {
-        await userRef.set({
-          golden_eggs: 0,
-          power_eggs: 0,
-          value: 5,
-          nickname: this.loginUser.displayName,
-          uid: this.loginUser.uid,
-          nsaid: ""
+        userRef.set({
+          title: present.title,
+          price: present.price,
+          maxprice: present.maxprice
         })
       } catch (error) {
         alert(error)
         return
       }
+    })
+    },
+    async createUser() {
+      const userRef = this.$fireStore.collection("users").doc(this.loginUser.uid)
+      try {
+        await userRef.set({
+          uid: "", // SalmonStatsのID
+          golden_eggs: 0, // 何回分リザルトを取得したかの関数
+          used: 0,
+          result: [0, 0, 0, 0, 0],
+          nickname: this.loginUser.displayName,
+          uid: this.loginUser.uid,
+        })
 
+      } catch (error) {
+        alert(error)
+        return
+      }
     },
     async signIn() {
       var provider = new this.$fireAuthObj.TwitterAuthProvider();
@@ -146,6 +162,7 @@ export default {
           const token = result.credential.accessToken
           const secret = result.credential.secret
           const user = result.user
+        console.log(result, this.user, this.loginUser)
           console.log(user.uid)
         }
       }).catch(function (error) {
@@ -159,6 +176,158 @@ export default {
   data() {
     return {
       user: [],
+            presents: [
+        {
+        title: "凪のあすから",
+        price: 0,
+        maxprice: 12000
+        },
+        {
+         title: "蟲師",
+         price: 0,
+         maxprice: 6200
+        },
+        {
+         title: "シュタインズ・ゲート",
+         price: 0,
+         maxprice: 5000,
+        },
+        {
+         title: "緋弾のアリア",
+         price: 0,
+         maxprice: 6500
+        },
+        {
+         title: "とある科学のレールガン",
+         price: 0,
+         maxprice: 5000,
+        },
+        {
+         title: "とある科学のレールガンS",
+         price: 0,
+         maxprice: 5000,
+        },
+        {
+         title: "城下町のダンデライオン",
+         price: 0,
+         maxprice: 3000,
+        },
+        {
+         title: "神様のメモ帳",
+         price: 0,
+         maxprice: 6200,
+        },
+        {
+         title: "境界の彼方",
+         price: 0,
+         maxprice: 7000,
+        },
+        {
+         title: "言の葉の庭",
+         price: 0,
+         maxprice: 3000,
+        },
+        {
+         title: "異能バトルは日常系のなかで",
+         price: 0,
+         maxprice: 7000,
+        },
+        {
+         title: "ガーリッシュナンバー",
+         price: 0,
+         maxprice: 6000
+        },
+        {
+         title: "たまこラブストーリー",
+         price: 0,
+         maxprice: 7000
+        },
+        {
+         title: "きんいろモザイク",
+         price: 0,
+         maxprice: 6000
+        },
+        {
+         title: "ハロー！きんいろモザイク",
+         price: 0,
+         maxprice: 6000
+        },
+        {
+         title: "放課後のプレアデス",
+         price: 0,
+         maxprice: 6000
+        },
+        {
+         title: "Wake Up Girls! 七人のアイドル",
+         price: 0,
+         maxprice: 3000
+        },
+        {
+         title: "Wake Up Girls!",
+         price: 0,
+         maxprice: 6000
+        },
+        {
+         title: "俺の妹がこんなに可愛いわけがない（一期）",
+         price: 0,
+         maxprice: 16000
+        },
+        {
+         title: "俺の妹がこんなに可愛いわけがない（二期）",
+         price: 0,
+         maxprice: 16000
+        },
+        {
+         title: "甘城ブリリアントパーク",
+         price: 0,
+         maxprice: 7000
+        },
+        {
+         title: "氷菓（二枚組）",
+         price: 0,
+         maxprice: 7000
+        },
+        {
+         title: "バトルプログラマーシラセ",
+         price: 0,
+         maxprice: 4000
+        },
+        {
+         title: "True Tears",
+         price: 0,
+         maxprice: 4000
+        },
+        {
+         title: "君の名は。",
+         price: 0,
+         maxprice: 3500
+        },
+        {
+         title: "涼宮ハルヒの憂鬱",
+         price: 0,
+         maxprice: 5500
+        },
+        {
+         title: "涼宮ハルヒの消失",
+         price: 0,
+         maxprice: 3500
+        },
+        {
+         title: "特例措置団体ステラ女学院C3",
+         price: 0,
+         maxprice: 6000
+        },
+        {
+         title: "ソードアート・オンライン",
+         price: 0,
+         maxprice: 20000
+        },
+        {
+         title: "ファンタジスタドール",
+         price: 0,
+         maxprice: 6000
+        },
+      ],
       loginUser: null,
       random: parseInt(Math.random() * 100)
     }
